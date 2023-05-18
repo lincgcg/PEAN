@@ -77,7 +77,7 @@ class TextDataset(Dataset):
             directory, args.model_type + "_cached_lm_" + str(block_size) + "_" + filename
         )
 
-        block_size = block_size - (tokenizer.max_len - tokenizer.max_len_single_sentence)
+        block_size = block_size - (tokenizer.model_max_length - tokenizer.model_max_length_single_sentence)
 
         if os.path.exists(cached_features_file) and not args.overwrite_cache:
             logger.info("Loading features from cached file %s", cached_features_file)
@@ -813,10 +813,10 @@ def main():
         )
 
     if args.block_size <= 0:
-        args.block_size = tokenizer.max_len
+        args.block_size = tokenizer.model_max_length
         # Our input block size will be the max possible for the model
     else:
-        args.block_size = min(args.block_size, tokenizer.max_len)
+        args.block_size = min(args.block_size, tokenizer.model_max_length)
 
     if args.model_name_or_path:
         model = AutoModelWithLMHead.from_pretrained(
