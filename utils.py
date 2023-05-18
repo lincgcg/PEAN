@@ -108,8 +108,8 @@ class DatasetIterater(object):
         self.batches = batches
         self.n_batches = len(batches) // batch_size
         self.residue = False
-        if len(batches) % self.n_batches != 0:
-            self.residue = True
+        # if len(batches) % self.n_batches != 0:
+        #     self.residue = True
         self.index = 0
         self.device = device
         self.pad_len_seq = pad_len_seq
